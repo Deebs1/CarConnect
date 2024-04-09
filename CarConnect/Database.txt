@@ -1,0 +1,58 @@
+create database CarConnect;
+use CarConnect;
+
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(20),
+    address VARCHAR(255),
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    registration_date DATE
+);
+
+CREATE TABLE Vehicle (
+    vehicleID INT PRIMARY KEY,
+    model VARCHAR(50),
+    make VARCHAR(50),
+    year INT,
+    color VARCHAR(50),
+    registrationNumber VARCHAR(50) UNIQUE,
+    availability BIT,
+    dailyRate DECIMAL(10, 2)
+);
+
+CREATE TABLE Reservation (
+    reservationID INT PRIMARY KEY,
+    customerID INT,
+    vehicleID INT,
+    startDate DATE,
+    EndDate DATE,
+    TotalCost DECIMAL(10, 2),
+    Status VARCHAR(50),
+    FOREIGN KEY (customerID) REFERENCES Customer(customer_id),
+    FOREIGN KEY (vehicleID) REFERENCES Vehicle(vehicleID)
+);
+
+CREATE TABLE Admin (
+    adminID INT PRIMARY KEY,
+    firstName NVARCHAR(50),
+    lastName NVARCHAR(50),
+    email NVARCHAR(100),
+    phoneNumber NVARCHAR(20),
+    username NVARCHAR(50) UNIQUE,
+    password NVARCHAR(255),
+    role NVARCHAR(50),
+    joinDate DATE
+);
+
+select * from Customer;
+select * from Vehicle;
+select * from Reservation;
+select * from Admin;
+
+insert into Vehicle values(1001, 'Toyato', 'India', 2023, 'Red','TN 45 AC 9814', 1, 100)
+insert into Reservation values(11, 1, 1001, '2024-01-20', '2024-01-24', 1000, 'booked')
+insert into Admin values(102,'s','s','sss@gmail.com','1234567890','rra','fa','vguy','2024-03-22')
